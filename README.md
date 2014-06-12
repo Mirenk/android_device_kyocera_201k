@@ -1,0 +1,42 @@
+# HONEY BEE 201K
+
+## Partition
+
+    mmcblk0p1  modem
+    mmcblk0p2  sbl1
+    mmcblk0p3  sbl2
+    mmcblk0p4  sbl3
+    mmcblk0p5  aboot
+    mmcblk0p6  rpm
+    mmcblk0p7  boot
+    mmcblk0p8  tz
+    mmcblk0p9  pad
+    mmcblk0p10 modemst1
+    mmcblk0p11 modemst2
+    mmcblk0p12 system
+    mmcblk0p13 userdata
+    mmcblk0p14 persist
+    mmcblk0p15 cache
+    mmcblk0p16 tombstones
+    mmcblk0p17 misc
+    mmcblk0p18 recovery
+    mmcblk0p19 fsg
+    mmcblk0p20 ssd
+    mmcblk0p21 log
+    mmcblk0p22 delta
+    mmcblk0p23 fotamng
+    mmcblk0p24 fota
+    mmcblk0p25 fotabk
+    mmcblk0p26 sbl2bk
+    mmcblk0p27 sbl3bk
+    mmcblk0p28 abootbk
+    mmcblk0p29 rpmbk
+    mmcblk0p30 tzbk
+    mmcblk0p31 reserve1
+    mmcblk0p32 systemproperty
+    mmcblk0p33 dnand
+    mmcblk0p34 bfss1
+    mmcblk0p35 bfss2
+    mmcblk0p36 bootwork
+    mmcblk0p37 chkcode
+    mmcblk0p38 reserve2
