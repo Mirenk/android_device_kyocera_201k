@@ -1,4 +1,5 @@
 on init
+    export LD_LIBRARY_PATH /vendor/lib
     insmod /sbin/mmc_protect.ko
 
 on post-fs
@@ -7,7 +8,7 @@ on post-fs
     wait /dev/block/mmcblk0p12
     write /sys/kernel/mmc_protect/clear mmcblk0p12
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     user root
     disabled
 
