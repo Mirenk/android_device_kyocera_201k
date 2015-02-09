@@ -3,8 +3,6 @@ on init
     insmod /sbin/mmc_protect.ko
 
 on post-fs
-    wait /dev/block/mmcblk0p7
-    write /sys/kernel/mmc_protect/clear mmcblk0p7
     wait /dev/block/mmcblk0p12
     write /sys/kernel/mmc_protect/clear mmcblk0p12
     wait /dev/block/mmcblk0p18
