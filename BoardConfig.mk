@@ -34,6 +34,7 @@ EXTRA_KERNEL_MODULES:
 	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
 	cp device/kyocera/201k/mmc_protect/mmc_protect.ko $(KERNEL_MODULES_OUT)
 	mv device/kyocera/201k/mmc_protect/mmc_protect.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
+	cp $(KERNEL_MODULES_OUT)/kc_sdgdrv.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
 TARGET_KERNEL_MODULES := EXTRA_KERNEL_MODULES
 
 BOARD_EGL_CFG := device/kyocera/201k/configs/egl.cfg
