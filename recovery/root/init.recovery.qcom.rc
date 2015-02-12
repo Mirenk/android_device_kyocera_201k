@@ -2,6 +2,9 @@ on init
     export LD_LIBRARY_PATH /vendor/lib
     insmod /sbin/mmc_protect.ko
 
+    insmod /sbin/kc_sdgdrv.ko
+    insmod /vendor/lib/modules/kc_sdcarddrv.ko
+
 on post-fs
     wait /dev/block/mmcblk0p12
     write /sys/kernel/mmc_protect/clear mmcblk0p12
