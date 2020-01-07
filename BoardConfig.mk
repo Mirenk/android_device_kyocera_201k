@@ -17,9 +17,9 @@ TARGET_BOOTLOADER_BOARD_NAME := 201k
 
 ENABLE_LOKI_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_RECOVERY_FSTAB := device/kyocera/201k/root/fstab.qcom
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/kyocera/201k/recovery/keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/kyocera/201k/recovery/graphics.c ../../../device/kyocera/201k/recovery/graphics_overlay.c
+TARGET_RECOVERY_FSTAB := device/kyocera/201k/root/recovery.fstab
+#BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/kyocera/201k/recovery/keys.c
+#BOARD_CUSTOM_GRAPHICS := ../../../device/kyocera/201k/recovery/graphics.c ../../../device/kyocera/201k/recovery/graphics_overlay.c
 TARGET_USERIMAGES_USE_EXT4 := true
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 no_console_suspend=1 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 maxcpus=2
@@ -27,8 +27,10 @@ BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 BOARD_WANTS_EMMC_BOOT := true
-TARGET_KERNEL_CONFIG := msm8960_defconfig
-TARGET_KERNEL_SOURCE := kernel/kyocera/201k
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+
+TW_THEME := portrait_mdpi
+TW_EXCLUDE_TWRPAPP := true
 
 EXTRA_KERNEL_MODULES:
 	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)

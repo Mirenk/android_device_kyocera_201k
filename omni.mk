@@ -12,7 +12,7 @@ $(call inherit-product, device/kyocera/201k/device_201k.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := 201k
-PRODUCT_NAME := cm_201k
+PRODUCT_NAME := omni_201k
 PRODUCT_BRAND := kyocera
 PRODUCT_MODEL := 201k
 PRODUCT_MANUFACTURER := kyocera
