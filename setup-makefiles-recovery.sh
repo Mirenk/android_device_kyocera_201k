@@ -2,7 +2,7 @@
 VENDOR=kyocera
 DEVICE=201k
 OUTDIR=vendor/$VENDOR/$DEVICE
-MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
+MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs-recovery.mk
 
 (cat << EOF) > $MAKEFILE
 # Copyright (C) 2011 The CyanogenMod Project
@@ -24,10 +24,10 @@ PRODUCT_COPY_FILES += \\
 EOF
 
 LINEEND=" \\"
-COUNT=`wc -l proprietary-files.txt | awk {'print $1'}`
-DISM=`egrep -c '(^#|^$)' proprietary-files.txt`
+COUNT=`wc -l proprietary-files-recovery.txt | awk {'print $1'}`
+DISM=`egrep -c '(^#|^$)' proprietary-files-recovery.txt`
 COUNT=`expr $COUNT - $DISM`
-for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
+for FILE in `egrep -v '(^#|^$)' proprietary-files-recovery.txt`; do
   COUNT=`expr $COUNT - 1`
   if [ $COUNT = "0" ]; then
     LINEEND=""
@@ -36,15 +36,11 @@ for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
   OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
   if [[ ! "$FILE" =~ ^-.* ]]; then
     FILE=`echo ${PARSING_ARRAY[0]} | sed -e "s/^-//g"`
+    FILENAME=`echo $FILE | awk -F/ '{print $NF}'`
     DEST=${PARSING_ARRAY[1]}
     if [ -n "$DEST" ]; then
       FILE=$DEST
     fi
-    echo "    $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
+    echo "    $OUTDIR/proprietary/recovery/root/sbin/$FILENAME:recovery/root/sbin/$FILENAME$LINEEND" >> $MAKEFILE
   fi
 done
-
-(cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk
-\$(call inherit-product, $OUTDIR/$DEVICE-vendor-blobs.mk)
-\$(call inherit-product, $OUTDIR/$DEVICE-vendor-blobs-recovery.mk)
-EOF

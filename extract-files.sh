@@ -55,10 +55,20 @@ function extract() {
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*
+RECOVERY=$BASE/recovery/root
+mkdir -p $BASE/tmp
+mkdir -p $RECOVERY/sbin
 
 extract ../../$VENDOR/$DEVICE/proprietary-files.txt $BASE
+extract ../../$VENDOR/$DEVICE/proprietary-files-recovery.txt $BASE/tmp
 
-extract ../../$VENDOR/$DEVICE/proprietary-files-recovery.txt ../../$VENDOR/$DEVICE/recovery/root/vendor
-find ../../$VENDOR/$DEVICE/recovery/root/vendor/bin -type f | xargs sed -i -e 's/\/system\/bin/\/vendor\/bin/g'
+cp $BASE/tmp/bin/* $RECOVERY/sbin
+cp $BASE/tmp/lib/modules/* $RECOVERY/sbin
+rm -rf $BASE/tmp
 
 ./setup-makefiles.sh
+./setup-makefiles-recovery.sh
+
+sed -i "s|/system/bin/linker|/sbin/linker\x0\x0\x0\x0\x0\x0|g" $RECOVERY/sbin/rmt_storage
+sed -i "s|/system/bin/linker|/sbin/linker\x0\x0\x0\x0\x0\x0|g" $RECOVERY/sbin/sdgpiocmd
+sed -i "s|/system/bin/sdgpiocmd|/sbin/sdgpiocmd\x0\x0\x0\x0\x0\x0|g" $RECOVERY/sbin/kc_sdcarddrv.ko

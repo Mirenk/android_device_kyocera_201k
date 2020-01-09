@@ -18,8 +18,6 @@ TARGET_BOOTLOADER_BOARD_NAME := 201k
 ENABLE_LOKI_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := device/kyocera/201k/root/recovery.fstab
-#BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/kyocera/201k/recovery/keys.c
-#BOARD_CUSTOM_GRAPHICS := ../../../device/kyocera/201k/recovery/graphics.c ../../../device/kyocera/201k/recovery/graphics_overlay.c
 TARGET_USERIMAGES_USE_EXT4 := true
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 no_console_suspend=1 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 maxcpus=2
@@ -29,18 +27,17 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 BOARD_WANTS_EMMC_BOOT := true
 TARGET_KERNEL_CONFIG := msm8960_defconfig
 TARGET_KERNEL_SOURCE := kernel/kyocera/201k
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.7/bin
 
 TW_THEME := portrait_mdpi
 TW_EXCLUDE_TWRPAPP := true
 
 EXTRA_KERNEL_MODULES:
-	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) CROSS_COMPILE=arm-eabi-
+	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) $(KERNEL_CROSS_COMPILE)
 	cp device/kyocera/201k/mmc_protect/mmc_protect.ko $(KERNEL_MODULES_OUT)
 	mv device/kyocera/201k/mmc_protect/mmc_protect.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
 	cp $(KERNEL_MODULES_OUT)/kc_sdgdrv.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
 TARGET_KERNEL_MODULES := EXTRA_KERNEL_MODULES
-
-BOARD_EGL_CFG := device/kyocera/201k/configs/egl.cfg
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00800000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216

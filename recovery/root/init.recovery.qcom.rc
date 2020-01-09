@@ -1,9 +1,8 @@
 on init
-    export LD_LIBRARY_PATH /vendor/lib
     insmod /sbin/mmc_protect.ko
 
     insmod /sbin/kc_sdgdrv.ko
-    insmod /vendor/lib/modules/kc_sdcarddrv.ko
+    insmod /sbin/kc_sdcarddrv.ko
 
 on post-fs
     wait /dev/block/mmcblk0p12
@@ -25,7 +24,7 @@ on emmc-fs
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 
-service rmt_storage /vendor/bin/rmt_storage
+service rmt_storage /sbin/rmt_storage
     user root
     disabled
 
