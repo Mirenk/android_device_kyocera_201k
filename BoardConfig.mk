@@ -27,13 +27,14 @@ BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 BOARD_WANTS_EMMC_BOOT := true
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+TARGET_KERNEL_CONFIG := msm8960_defconfig
+TARGET_KERNEL_SOURCE := kernel/kyocera/201k
 
 TW_THEME := portrait_mdpi
 TW_EXCLUDE_TWRPAPP := true
 
 EXTRA_KERNEL_MODULES:
-	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	make -C device/kyocera/201k/mmc_protect KDIR=$(KERNEL_OUT) PWD=$(PWD)/device/kyocera/201k/mmc_protect ARCH=$(TARGET_ARCH) CROSS_COMPILE=arm-eabi-
 	cp device/kyocera/201k/mmc_protect/mmc_protect.ko $(KERNEL_MODULES_OUT)
 	mv device/kyocera/201k/mmc_protect/mmc_protect.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
 	cp $(KERNEL_MODULES_OUT)/kc_sdgdrv.ko $(TARGET_RECOVERY_ROOT_OUT)/sbin
